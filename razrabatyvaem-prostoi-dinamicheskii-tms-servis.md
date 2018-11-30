@@ -47,7 +47,7 @@ class MyView(APIView):
 Далее по формулам рассчитаем охват будущего тайла в зависимости от типа тайловой сетки (xyz, tms) :
 
 ```python
-	step = max(bbox['maxx'] - bbox['minx'], bbox['maxy'] - bbox['miny']) / 2 ** z
+    step = max(bbox['maxx'] - bbox['minx'], bbox['maxy'] - bbox['miny']) / 2 ** z
     extents = dict()
     extents['tms'] = (
         bbox['minx'] + x * step,
@@ -66,7 +66,7 @@ class MyView(APIView):
 Экспериментально было установлено, что оптимальный размер тайла 256х256 пикселей. Далее создадим наш тайл с заданными размерами:
 
 ```python
-	tile = dict(width=256, height=256)
+    tile = dict(width=256, height=256)
     map = mapnik.Map(tile['width'], tile['height'])
     map.background = mapnik.Color('steelblue')
 ```
@@ -74,7 +74,7 @@ class MyView(APIView):
 И подготовим его к отрисовке, задав ограничительную рамку и загрузив стили из style.xml:
 
 ```python
-	mapnik.load_map(map, 'style/style.xml')
+    mapnik.load_map(map, 'style/style.xml')
     box = mapnik.Box2d(*extents.get(service))
     map.zoom_to_box(box)
     mapnik.render_to_file(map, 'world.png', 'png') #сохранение тайла в файл просто для тестов
@@ -150,7 +150,7 @@ style.xml с описанием стилей и слоев
 Если вы не хотите использовать xml-стили, то задавать стили можно непосредственно в коде:
 ```python
 	#...
-	style = mapnik.Style()
+    style = mapnik.Style()
     rule = mapnik.Rule()
     point_symbolizer= mapnik.PointSymbolizer()
     rule.symbols.append(point_symbolizer)
